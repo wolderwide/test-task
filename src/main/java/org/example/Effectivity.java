@@ -20,7 +20,23 @@ public class Effectivity {
     private List<Range> numbers;
     private String model;
 
+    public Effectivity(String input) {
+        String[] tokens = input.split(" ");
+        if (tokens.length > 2)
+            throw new EffectivityIncorrectException();
+
+        String model = tokens[1];
+        if (!(model.startsWith("(") && model.endsWith(")")))
+            throw new EffectivityIncorrectException();
+
+        parse(tokens[0], model.substring(1, model.length() - 1));
+    }
+
     public Effectivity(String range, String model) {
+        parse(range, model);
+    }
+
+    private void parse(String range, String model) {
         if (range == null || model == null
             || range.trim().isEmpty()
                 || model.trim().isEmpty()

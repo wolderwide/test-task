@@ -18,6 +18,14 @@ public class EffectivityTest {
     }
 
     @Test
+    public void checkFromString() {
+        var input = "1,4-6 (MC-21)";
+        var effectivity = new Effectivity(input);
+
+        assertEquals("1,4-6 (MC-21)", effectivity.toString());
+    }
+
+    @Test
     public void checkSimplify() {
         var range = "1,2,3,4,7-9,10-12,14-16,17-UP";
         var model = "MC-21";
