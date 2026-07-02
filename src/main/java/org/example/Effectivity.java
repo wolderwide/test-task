@@ -1,8 +1,10 @@
 package org.example;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +14,9 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-@Setter(AccessLevel.PRIVATE)
+@Data
+@Accessors(chain = true)
+@NoArgsConstructor
 public class Effectivity {
 
     private static final Integer MAX_INT = Integer.MAX_VALUE;
@@ -69,7 +73,7 @@ public class Effectivity {
         setModel(model);
     }
 
-    public List<Range> simplify(List<Range> source) {
+    public static List<Range> simplify(List<Range> source) {
         if (source == null || source.isEmpty())
             return Collections.emptyList();
 
@@ -114,7 +118,7 @@ public class Effectivity {
         return simplified;
     }
 
-    private List<Range> mergeConsecutive(List<Integer> numbers) {
+    private static List<Range> mergeConsecutive(List<Integer> numbers) {
         List<Range> result = new ArrayList<>();
         if (numbers.isEmpty()) return result;
 
@@ -148,7 +152,8 @@ public class Effectivity {
     }
 
     @AllArgsConstructor
-    private static final class Range {
+    @Getter
+    public static final class Range {
         private int start;
         private int end;
         private boolean withUp;
